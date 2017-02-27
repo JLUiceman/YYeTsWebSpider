@@ -1,17 +1,55 @@
+#coding=utf-8
 import urllib2
+import urllib
 from bs4 import BeautifulSoup
 import os
 
+baseUrl = 'http://cili17.com/?topic_title3='
 
-baseUrl = 'http://cili17.com/?_=123'
+class YYeTs:
+	def __init__(self, keyWord):
+		#python3.x版本需要使用urllib.pare.quote
+		self.url = baseUrl + urllib.quote(keyWord)
 
-req = urllib2.Request(baseUrl)
-response = urllib2.urlopen(req)
-print response.read()
+	def getData(self, pageNum):
+		url = self.url + '&p=' + str(pageNum)
 
-x = 'this is a test msg'
-f = open('yyRes.json', 'w')
-f.write(x)
-f.close
+		try:
+			req = urllib2.Request(self.url)
+			response = urllib2.urlopen(req)
+			return response.read()
+		except urllib2.HTTPError, e:
+			print BeautifulSoup(e.read(), "html.parser")
+			print e.code
+		except urllib2.URLError, e:
+			print e.reason
+		else:
+			print 'get it'
+		finally:
+			pass
 
-# 仅仅是初步探索，syn shell以及具体逻辑待补全
+def getContent(data):
+	soup = BeautifulSoup(data, 'html.parser')
+	for mangent in soup.find_all('dd'):
+		f.write(mangent['ed2k'] + '\n')
+
+def getNum(data):
+	soup = BeautifulSoup(data, 'html.parser')
+	sourceStr = soup.find_all("div",class_="pages")[0].get_text()
+	return sourceStr[sourceStr.index('/')+1]		
+
+
+def init(num):
+	while num > 0 :
+		d = yyets.getData(num)
+		getContent(d)
+		num = int(num) - 1
+	else:
+		f.close	
+
+f = open('yyRes.json', 'w')	
+yyets = YYeTs('行尸走肉')	
+num = getNum(yyets.getData(1))
+
+init(num)	
+
