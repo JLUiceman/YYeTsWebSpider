@@ -52,12 +52,12 @@ def init(num):
 		allNum = allNum + getContent(d)
 		num = int(num) - 1
 	else:
-		f2 = open('synRes.log', 'a')
+		f2 = open('/home/node-server/workspace/YYeTsWebSpider/synRes.log', 'a')
 		f2.write(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '同步结果共' + str(allNum) + '条\n')
 		f2.close()
 		f.close	
 
-f = open('yyRes.json', 'w+')	
+f = open('/home/node-server/workspace/YYeTsWebSpider/yyRes.json', 'w+')	
 yyets = YYeTs('行尸走肉')	
 num = getNum(yyets.getData(1))
 
