@@ -1,3 +1,4 @@
+#!/bin/python
 #coding=utf-8
 import urllib2
 import urllib
@@ -31,7 +32,8 @@ class YYeTs:
 def getContent(data):
 	soup = BeautifulSoup(data, 'html.parser')
 	for mangent in soup.find_all('dd'):
-		f.write(mangent['ed2k'] + '\n')
+		if mangent.find_all('a')[0].get_text().count('WEB-HR') > 0: #只抓取web-hr的资源
+			f.write(mangent.find_all('a')[0].get_text()[22:28] + ':  ' +mangent['ed2k'] + '\n')
 
 def getNum(data):
 	soup = BeautifulSoup(data, 'html.parser')
@@ -47,7 +49,7 @@ def init(num):
 	else:
 		f.close	
 
-f = open('yyRes.json', 'w')	
+f = open('yyRes.json', 'w+')	
 yyets = YYeTs('行尸走肉')	
 num = getNum(yyets.getData(1))
 
