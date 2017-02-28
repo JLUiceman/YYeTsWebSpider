@@ -37,7 +37,8 @@ def getContent(data):
 		if mangent.find_all('a')[0].get_text().count('WEB-HR') > 0: #只抓取web-hr的资源
 			f.write(mangent.find_all('a')[0].get_text()[22:28] + ':' +mangent['ed2k'] + '\n')
 			num = num + 1
-	return num		
+	else:		
+		return num		
 
 def getNum(data):
 	soup = BeautifulSoup(data, 'html.parser')
