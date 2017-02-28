@@ -1,7 +1,6 @@
 #!/bin/sh
 
-echo $(date +"%F-%H%M%S") >> README.md
-echo -e '\n' >> README.md
+echo "$(date +"%F-%H%M%S") + <br />" >> README.md
 echo 'success update' >> mylog.log
 
 git add .
