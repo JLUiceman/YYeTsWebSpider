@@ -3,6 +3,7 @@
 import urllib2
 import urllib
 from bs4 import BeautifulSoup
+import time
 import os
 
 baseUrl = 'http://cili17.com/?topic_title3='
@@ -30,10 +31,13 @@ class YYeTs:
 			pass
 
 def getContent(data):
+	num = 0
 	soup = BeautifulSoup(data, 'html.parser')
 	for mangent in soup.find_all('dd'):
 		if mangent.find_all('a')[0].get_text().count('WEB-HR') > 0: #只抓取web-hr的资源
-			f.write(mangent.find_all('a')[0].get_text()[22:28] + ':  ' +mangent['ed2k'] + '\n')
+			f.write(mangent.find_all('a')[0].get_text()[22:28] + ':' +mangent['ed2k'] + '\n')
+			num = num + 1
+	return num		
 
 def getNum(data):
 	soup = BeautifulSoup(data, 'html.parser')
@@ -42,11 +46,15 @@ def getNum(data):
 
 
 def init(num):
+	allNum = 0
 	while num > 0 :
 		d = yyets.getData(num)
-		getContent(d)
+		allNum = allNum + getContent(d)
 		num = int(num) - 1
 	else:
+		f2 = open('synRes.log', 'a')
+		f2.write(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '同步结果共' + str(allNum) + '条\n')
+		f2.close()
 		f.close	
 
 f = open('yyRes.json', 'w+')	
