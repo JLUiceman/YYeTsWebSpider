@@ -1,6 +1,6 @@
 #!/bin/sh
 
-baseUrl=‘http://cili17.com/?_=123’
+baseUrl='http://cili17.com/?_=123'
 status_code=$(curl -I $baseUrl | grep '200 OK' | wc -l)
 if [ $status_code -eq 1 ];then
   canView='可以'
