@@ -42,6 +42,7 @@ def getContent(data):
 
 def getNum(data):
 	soup = BeautifulSoup(data, 'html.parser')
+	print soup
 	sourceStr = soup.find_all("div",class_="pages")[0].get_text()
 	return sourceStr[sourceStr.index('/')+1]		
 
