@@ -18,6 +18,7 @@ class YYeTs:
 
 		try:
 			req = urllib2.Request(self.url)
+			req.add_header("User-Agent","Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)")
 			response = urllib2.urlopen(req)
 			return response.read()
 		except urllib2.HTTPError, e:
