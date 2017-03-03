@@ -46,7 +46,7 @@ def getNum(data):
 	return sourceStr[sourceStr.index('/')+1]		
 
 
-def init(num):
+def init(obj):
 	num = getNum(obj.getData(1))
 	allNum = 0
 	while num > 0 :
