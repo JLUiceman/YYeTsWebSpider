@@ -47,6 +47,7 @@ def getNum(data):
 
 
 def init(num):
+	num = getNum(obj.getData(1))
 	allNum = 0
 	while num > 0 :
 		d = yyets.getData(num)
@@ -60,7 +61,6 @@ def init(num):
 
 f = open('/home/node-server/workspace/YYeTsWebSpider/yyRes.json', 'w+')	
 yyets = YYeTs('行尸走肉')	
-num = getNum(yyets.getData(1))
 
-init(num)	
+init(yyets)	
 
