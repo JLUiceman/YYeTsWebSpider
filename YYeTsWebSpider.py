@@ -19,6 +19,7 @@ class YYeTs:
 		try:
 			req = urllib2.Request(self.url)
 			response = urllib2.urlopen(req)
+			print response.read().decode("gbk").encode("utf-8")
 			return response.read()
 		except urllib2.HTTPError, e:
 			print BeautifulSoup(e.read(), "html.parser")
@@ -42,7 +43,6 @@ def getContent(data):
 
 def getNum(data):
 	soup = BeautifulSoup(data, 'html.parser')
-	print soup
 	sourceStr = soup.find_all("div",class_="pages")[0].get_text()
 	return sourceStr[sourceStr.index('/')+1]		
 
