@@ -15,9 +15,19 @@ class YYeTs:
 
 	def getData(self, pageNum):
 		url = self.url + '&p=' + str(pageNum)
+		headers = { 'Host':'cili17.com',
+                    'Connection':'keep-alive',
+                    'Cache-Control':'max-age=0',
+                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36',
+                    'Accept-Encoding': 'gzip, deflate, sdch',
+                    'Accept-Language': 'zh-CN,zh;q=0.8,ja;q=0.6'
+                    }
+		d = None
 
 		try:
-			req = urllib2.Request(self.url)
+			req = urllib2.Request(self.url,d,headers)
 			req.add_header("User-Agent","Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)")
 			response = urllib2.urlopen(req)
 			print response.read().decode("gbk").encode("utf-8")
